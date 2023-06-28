@@ -1,7 +1,7 @@
 import { ADD_TO_CART,DELETE_FROM_CART } from "../actionTypes/ActionTypes";
 
 const initialState = {
-    cart : [],
+     cart : [],
 }
 
 const cartReducer = (state = initialState, action) =>{
@@ -9,7 +9,7 @@ const cartReducer = (state = initialState, action) =>{
         case ADD_TO_CART:
             return{
                 ...state,
-                cart : [...state.cart , action.payload],
+                cart : action.payload,
                 
             }
         
@@ -18,7 +18,7 @@ const cartReducer = (state = initialState, action) =>{
                 ...state,
                 cart : action.payload,
             }
-        
+
         default:
             return state;
     }

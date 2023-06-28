@@ -1,21 +1,16 @@
-import { SIGN_IN,SIGN_UP } from "../actionTypes/ActionTypes";
+import { SIGN_UP } from "../actionTypes/ActionTypes";
 
-const signInUser = () =>{
-    return{
-        type: SIGN_IN,
-        payload:{
 
-        }
-
-    }
-}
-
-const signUpUser = (det) =>{
+const signUpUser = (first,second,mail,pass) =>{
     return{
         type: SIGN_UP,
-        payload : det
-
+        payload : {
+            first,
+            second,
+            mail,
+            pass,
+        }
     }
 }
 
-export {signInUser,signUpUser};
+export {signUpUser};

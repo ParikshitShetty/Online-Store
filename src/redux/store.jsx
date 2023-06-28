@@ -6,6 +6,9 @@ import { persistReducer,
      persistStore, FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER
      } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
+import checkOutReducer from "./reducers/CheckOutReducer";
+import shippingReducer from "./reducers/ShiipingReducer";
+import ViewReducer from "./reducers/ViewingProductsReducer";
 
 
 
@@ -13,19 +16,19 @@ import storage from 'redux-persist/lib/storage';
 const rootReducer = combineReducers({
     cartReducer,
     userReducer,
-    homeReducer
-
+    homeReducer,
+    checkOutReducer,
+    shippingReducer,
+    ViewReducer,
 })
 
 const persistConfig = {
     key : 'root',
     storage,
+    whitelist: [shippingReducer,userReducer,homeReducer],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-
-
 
 
     const store = configureStore({
@@ -40,17 +43,3 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
     
 
 export default store;
-
-
-
-
-// const rootReducer = combineReducers({
-//     cartReducer,
-//     userReducer,
-//     homeReducer
-
-// })
-
-// const store = configureStore({reducer:rootReducer   });
-
-// export default store;

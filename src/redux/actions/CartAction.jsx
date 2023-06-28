@@ -1,10 +1,10 @@
-import { ADD_TO_CART,DELETE_FROM_CART, SIGN_IN, SIGN_UP } from "../actionTypes/ActionTypes";
+import { ADD_TO_CART,DELETE_FROM_CART } from "../actionTypes/ActionTypes";
 
 
-const addToCart = (item) =>{
+const addToCart = (newArr) =>{
     return{
         type: ADD_TO_CART,
-        payload : item,
+        payload : newArr,
 
     }
 }
@@ -15,5 +15,6 @@ const deleteFromCart = (updated) =>{
         payload : updated,
     }
 }
+
 
 export {addToCart,deleteFromCart};

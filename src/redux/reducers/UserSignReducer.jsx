@@ -1,4 +1,4 @@
-import { SIGN_IN,SIGN_UP } from "../actionTypes/ActionTypes"
+import {SIGN_UP } from "../actionTypes/ActionTypes"
 
 
 const initialState = {
@@ -16,14 +16,13 @@ const userReducer = (state = initialState, action) =>{
         case SIGN_UP:
             return{
                 ...state,
-                user :  action.payload,
+                user : {
+                    firstName : action.payload.first,
+                    lastName : action.payload.second,
+                    email : action.payload.mail,
+                    password : action.payload.pass,
+                } ,
                 formSubmitted : true,
-
-            }
-
-        case SIGN_IN:
-            return{
-
             }
             
         default:

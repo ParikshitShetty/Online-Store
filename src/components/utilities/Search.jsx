@@ -8,8 +8,6 @@ const Search = () =>{
     
     const dispatch = useDispatch()
 
-    
-
     return(
     <>
     <input type="search"
