@@ -31,7 +31,7 @@ const Checkout = (props) =>{
 
     const [save , setSave] = useState(false)
 
-    console.log(typeof(checkoutData))
+    //console.log(typeof(checkoutData))
 
     const handleShippingData = (e) =>{
         const {name, value} = e.target;
@@ -67,12 +67,13 @@ const Checkout = (props) =>{
            navigate('/')
           }, 1500);
     }
-    console.log(cart.cart)
-    console.log(checkoutData.bought)
-
+    //console.log(cart.cart)
     
-    console.log("reducer",userData.ShippingData)
-    console.log("state",shippingDetails)
+    let price = checkoutData.bought.price;
+    let count = checkoutData.items;
+    let total = count*price;
+    let totaledTax = 0.18 * total;
+
 
     return(
         <>
@@ -80,7 +81,7 @@ const Checkout = (props) =>{
 
         <div className="container p-12 mx-auto bg-slate-200">
         <h1 className="flex items-center justify-center font-bold text-blue-600 text-md lg:text-3xl">
-                Ecommerce Checkout Page 
+                Checkout Page 
             </h1>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6" onClick={e => navigate(-1)}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -182,15 +183,19 @@ const Checkout = (props) =>{
                                 </div>
                             </div>
                         </div>
+
                         <div
                             className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                            Subtotal<span className="ml-2">${checkoutData.bought.price}</span></div>
+                            No.Of Itmes<span className="ml-2">{count}</span></div>
                         <div
                             className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                            Shipping Tax<span className="ml-2">${0.18*checkoutData.bought.price}</span></div>
+                            Subtotal<span className="ml-2">${total}</span></div>
                         <div
                             className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
-                            Total<span className="ml-2">${0.18*checkoutData.bought.price + checkoutData.bought.price}</span></div>
+                            Shipping Tax<span className="ml-2">${totaledTax}</span></div>
+                        <div
+                            className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
+                            Total<span className="ml-2">${total+totaledTax}</span></div>
                     </div>
                 </div>
                 

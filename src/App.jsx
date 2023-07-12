@@ -5,8 +5,8 @@ import Home from './components/Home'
 import Register from './components/SignUp'
 import Login from './components/SignIn'
 import Checkout from './components/Checkout'
-import productView from './components/PrdouctView'
 import ProductView from './components/PrdouctView'
+
 
 
 
@@ -23,6 +23,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/checkout' element={<Checkout/>}/>
         <Route path='/productview' element={<ProductView/>}/>
+        
       </Routes>
       </div>
       

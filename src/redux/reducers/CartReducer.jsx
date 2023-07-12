@@ -12,7 +12,16 @@ const cartReducer = (state = initialState, action) =>{
                 cart : action.payload,
                 
             }
-        
+    //     case ADD_TO_CART:
+    //   const { payload: element } = action;
+    //   if (!state.cart.includes(element)) {
+    //     return {
+    //       ...state,
+    //       cart: [...state.cart, element],
+    //     };
+    //   }
+    //   return state;
+
         case DELETE_FROM_CART:
             return{
                 ...state,

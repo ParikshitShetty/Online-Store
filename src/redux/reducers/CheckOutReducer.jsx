@@ -1,7 +1,8 @@
-import { BUY_NOW_CHECKOUT,DELETE_CHECKOUT_DATA } from "../actionTypes/ActionTypes";
+import { BUY_NOW_CHECKOUT,DELETE_CHECKOUT_DATA,UPDATE_CHECKOUT_ITEMS } from "../actionTypes/ActionTypes";
 
 const initialState = {
     bought : [],
+    items : 1,
 }
 
 const checkOutReducer = (state = initialState, action) =>{
@@ -16,6 +17,12 @@ const checkOutReducer = (state = initialState, action) =>{
             return{
                 ...state,
                 bought : action.payload,
+            }
+
+        case UPDATE_CHECKOUT_ITEMS:
+            return{
+                ...state,
+                items : action.payload,
             }
 
         default:

@@ -4,10 +4,9 @@ import { dropHandle } from "../../redux/actions/HomeAction";
 
 
 
-const Dropdown = () =>{
+const Dropdown = ({filter}) =>{
 
     const reducerData = useSelector(state => state.homeReducer) 
-
     
     const dispatch = useDispatch()
 
@@ -15,31 +14,37 @@ const Dropdown = () =>{
 
     const [selected,setSelected] = useState('');
 
+    
+
     const handleChange = (event) => {
         dispatch(dropHandle(event.target.value))
         setSelected(event.target.value);
         
       };
 
-   
-    
-
     return(
     <>
+
+        <div>
+            
         {reducerData.data.length > 0 &&
         
         <div className="relative w-auto m-2 lg:max-w-sm">
-            <select className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600" onChange={handleChange}>
+
+
+            {filter &&
+            <select className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600" placeholder="filter" value={dropDownData} onChange={handleChange}>
             
-                <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Filter</option>
+                <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Select an Filter</option>
                 <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white" value="rating">Rating</option>
                 <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white" value="price">Price</option>
                 <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white" value="category">Category</option>
+
             </select>
-        </div> 
+            }
+        </div>    
         }
-        {
-        dropDownData == 'rating'?
+        {dropDownData == 'rating'?
 
         <div className="relative w-auto m-2 lg:max-w-sm">
             <select className="w-full p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600" >
@@ -68,16 +73,9 @@ const Dropdown = () =>{
                 <option className="self-center text-xl font-semibold whitespace-nowrap dark:text-white" value="">women's clothing</option>
             </select>
         </div>
-
-        
         }
-
+        </div>
         
-        
-
-    
-        
-
     </>
     )
 }

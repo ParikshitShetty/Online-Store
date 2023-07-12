@@ -29,9 +29,9 @@ const Register = () =>{
             return{...details,[name]: value}
         })
     }
-    console.log(details)
-    console.log('reudcer')
-    console.log(users)
+    // console.log(details)
+    // console.log('reudcer')
+    // console.log(users)
     
 
 

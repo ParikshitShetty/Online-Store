@@ -25,7 +25,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key : 'root',
     storage,
-    whitelist: [shippingReducer,userReducer,homeReducer],
+    whitelist: [shippingReducer,userReducer],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -38,8 +38,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
                 serializableCheck:{
                     ignoredActions:[FLUSH,REHYDRATE,PAUSE,PERSIST,PURGE,REGISTER]
                 }
-            })
+            }),
      });
+
     
 
 export default store;

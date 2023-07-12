@@ -3,7 +3,7 @@ import { deleteFromCart } from "../redux/actions/CartAction";
 import Navbar from "./utilities/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { productCheckout } from "../redux/actions/CheckOutAction";
+import { checkoutItemUpdater, productCheckout } from "../redux/actions/CheckOutAction";
 
 
 
@@ -26,8 +26,9 @@ const Cart = () =>{
     }
 
     const handleCheckOut = (check) =>{
-        console.log(data.bought)
+        //console.log(data.bought)
         dispatch(productCheckout(check))
+        dispatch(checkoutItemUpdater(1))
         navigate('/checkout')    
     }
 

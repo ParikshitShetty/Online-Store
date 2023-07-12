@@ -27,8 +27,8 @@ const Login = () =>{
             return{...loginDetails,[name]: value}
         })
     }
-     console.log(loginDetails)
-     console.log(users)
+    //  console.log(loginDetails)
+    //  console.log(users)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
