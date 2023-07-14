@@ -1,11 +1,19 @@
-import { SAVE_SHIPPING_DATA } from "../actionTypes/ActionTypes";
+import { SAVE_SHIPPING_DATA,SEND_SHIPPING_DATA } from "../actionTypes/ActionTypes";
 
 const sendShippingData = (shippingDetails) =>{
     return{
-        type: SAVE_SHIPPING_DATA,
+        type: SEND_SHIPPING_DATA,
         payload : shippingDetails,
 
     }
 }
 
-export {sendShippingData};
+const saveShippingData = (val) =>{
+    return{
+        type: SAVE_SHIPPING_DATA,
+        payload : val,
+
+    }
+}
+
+export {sendShippingData,saveShippingData};

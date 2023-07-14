@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./utilities/Navbar";
 import { useNavigate } from "react-router-dom";
 import { checkoutItemUpdater, productCheckout } from "../redux/actions/CheckOutAction";
-import { parse } from "postcss";
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -65,23 +64,27 @@ const ProductView = () =>{
         }
     }
 
+    
+
     //console.log(noOfItems)
 
     return(
         <>
 
-        <div className="flex flex-col items-center bg-grey-light font-sans leading-normal tracking-normal h-screen w-screen">
-	        <Navbar/>
-            <ToastContainer autoClose={3000}/>
-         
-            <div className="flex flex-col md:flex-row items-center justify-center relative m-6  bg-white border border-gray-200 rounded-lg shadow  0 dark:border-gray-700 dark:bg-gray-800  h-screen max-w-6xl">
+        <div className="flex flex-col min-h-screen">
+        <Navbar/>
+       
             
-               
-                <div className=" flex md:w-2/5 w-auto">
-                <img className="object-cover w-full rounded-lg h-96 md:h-3/4 md:w-full md:rounded-lg" src={viewData.view.image} alt="product image"/>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="3.5" stroke="currentColor" className="w-8 h-8 absolute top-0 left-0" onClick={e => navigate(-1)}>
+        <div className="flex flex-col items-center bg-grey-light font-sans leading-normal tracking-normal w-screen">
+	        
+            <ToastContainer autoClose={3000}/>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="3.5" stroke="currentColor" className="w-8 h-8 fixed left-0" onClick={e => navigate(-1)}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                     </svg>
+            <div className="flex flex-col md:flex-row items-center justify-center relative m-6 bg-white border border-gray-200 rounded-lg shadow  0 dark:border-gray-700 dark:bg-gray-800 min-h-screen max-w-6xl">
+            
+                <div className=" flex md:w-2/5 w-auto">
+                <img className=" w-full rounded-lg h-96 md:h-3/4 md:w-full md:rounded-lg" src={viewData.view.image} alt="product image"/> 
                 </div>
 
                 <div className="flex flex-col justify-evenly  leading-normal md:w-3/5 ">
@@ -114,6 +117,7 @@ const ProductView = () =>{
                     
                 </div>
             </div>
+        </div>
         </div>
         </>
     )

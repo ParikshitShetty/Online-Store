@@ -1,4 +1,4 @@
-import { ADD_DATA,FILTER_DATA,SET_SEARCHTERM,SET_DROPDOWNFILTER,SET_CLICKED } from "../actionTypes/ActionTypes";
+import { ADD_DATA,FILTER_DATA,SET_SEARCHTERM,SET_DROPDOWNFILTER,SET_CLICKED,SEC_FILTER } from "../actionTypes/ActionTypes";
 
 const addApiData = (jsonData) =>{
     return{
@@ -35,10 +35,18 @@ const changeClick = (clcickValue) =>{
     }
 }
 
+const filterHandle = (value) =>{
+    return{
+        type : SEC_FILTER,
+        payload : value,
+    }
+}
+
 export 
  {  addApiData,
     filterApiData,
     setSearchTerm,
     dropHandle,
-    changeClick
+    changeClick,
+    filterHandle,
 };

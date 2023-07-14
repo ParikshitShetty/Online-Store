@@ -1,4 +1,4 @@
-import { BUY_NOW_CHECKOUT,DELETE_CHECKOUT_DATA,UPDATE_CHECKOUT_ITEMS } from "../actionTypes/ActionTypes";
+import { BUY_NOW_CHECKOUT,DELETE_CHECKOUT_DATA,UPDATE_CHECKOUT_ITEMS,CART_CHECKOUT } from "../actionTypes/ActionTypes";
 
 const productCheckout = (data) =>{
     return{
@@ -16,6 +16,14 @@ const checkoutDeleter = (empty) =>{
     }
 }
 
+const cartCheckout = (item) =>{
+    return{
+        type : CART_CHECKOUT,
+        payload : item,
+    }
+}
+
+
 const checkoutItemUpdater = (val) =>{
     return{
         type: UPDATE_CHECKOUT_ITEMS,
@@ -23,4 +31,4 @@ const checkoutItemUpdater = (val) =>{
 
     }
 }
-export {productCheckout,checkoutDeleter,checkoutItemUpdater}
+export {productCheckout,checkoutDeleter,checkoutItemUpdater,cartCheckout}

@@ -9,6 +9,9 @@ import storage from 'redux-persist/lib/storage';
 import checkOutReducer from "./reducers/CheckOutReducer";
 import shippingReducer from "./reducers/ShiipingReducer";
 import ViewReducer from "./reducers/ViewingProductsReducer";
+import ThemeReducer from "./reducers/ThemeReducer";
+import signInReducer from "./reducers/SignInReducer";
+import filterReducer from "./reducers/FilterReducer";
 
 
 
@@ -20,12 +23,15 @@ const rootReducer = combineReducers({
     checkOutReducer,
     shippingReducer,
     ViewReducer,
+    ThemeReducer,
+    signInReducer,
+    filterReducer,
 })
 
 const persistConfig = {
     key : 'root',
     storage,
-    whitelist: [shippingReducer,userReducer],
+    blacklist : [cartReducer,homeReducer],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

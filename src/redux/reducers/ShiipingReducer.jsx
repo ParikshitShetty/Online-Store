@@ -1,4 +1,4 @@
-import { SAVE_SHIPPING_DATA } from "../actionTypes/ActionTypes";
+import { SAVE_SHIPPING_DATA,SEND_SHIPPING_DATA } from "../actionTypes/ActionTypes";
 
 const initialState = {
     ShippingData : {
@@ -10,11 +10,13 @@ const initialState = {
         postCode : '',
         notes : '', 
     },
+    saved : false,
+    submitted : false,
 }
 
 const shippingReducer = (state = initialState, action) =>{
     switch(action.type){
-        case SAVE_SHIPPING_DATA:
+        case SEND_SHIPPING_DATA:
             return{
                 ...state,
                 ShippingData : {
@@ -26,6 +28,13 @@ const shippingReducer = (state = initialState, action) =>{
                     postCode    :  action.payload.postCode,
                     notes       :     action.payload.notes,
                 },
+                submitted: !initialState.submitted,
+            }
+        case SAVE_SHIPPING_DATA:
+            return{
+                ...state,
+                saved : action.payload,
+
             }
 
         default:

@@ -1,18 +1,17 @@
-import React, { useEffect,useMemo,useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addApiData,filterApiData,changeClick } from "../redux/actions/HomeAction";
 import Navbar from "./utilities/Navbar";
 import { addToCart } from "../redux/actions/CartAction";
 import 'react-toastify/dist/ReactToastify.css';
 import { toast,ToastContainer } from "react-toastify";
-import { redirect, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { checkoutItemUpdater, productCheckout } from "../redux/actions/CheckOutAction";
 import { viewAdder } from "../redux/actions/VIewAction";
-import ProductView from "./PrdouctView";
 import Pagination from "./utilities/Pagination";
 import ProductRenderer from "./utilities/ProductRenderer";
 import SideBar from "./utilities/SideBar";
-
+import Filtered from "./utilities/Filtered";
 
 const Home = () =>{
 
@@ -29,6 +28,10 @@ const Home = () =>{
     const checkOutData = useSelector(state => state.checkOutReducer)
 
     const v = useSelector(state => state.ViewReducer)
+
+    const sign = useSelector(state => state.signInReducer)
+
+    const filterData = useSelector(state => state.filterReducer);
 
     const dispatch = useDispatch();
 
@@ -50,35 +53,33 @@ const Home = () =>{
 
     const firstPostIndex = lastPostIndex - postsPerPage;
 
-    const currentPosts = apiResp.data.slice(firstPostIndex,lastPostIndex)
+    let currentPosts = apiResp.data.slice(firstPostIndex,lastPostIndex)
 
-    const filteredPosts = apiResp.filtered.slice(firstPostIndex,lastPostIndex)
+    let filteredPosts = apiResp.filtered.slice(firstPostIndex,lastPostIndex)
 
-    //console.log(term)
+    console.log(sign)
 
     document.title = 'welcome to homepage';
      
-    const hanldeAddToCart = (item) =>{
+    const handleAddToCart = (item) =>{
         let cartAdder = Object.assign([],cartData.cart)
-            if(!cartAdder.includes(item)){
-                cartAdder =[item,...cartAdder]
-                console.log('after updated',cartAdder)
-                dispatch(addToCart(cartAdder))
-    
-                toast.success("Item added to cart", {
-                    position: toast.POSITION.TOP_RIGHT  ,  
-                  });
-            }
-            else{
-                toast.info("Item already in cart", {
-                    position: toast.POSITION.TOP_RIGHT  ,  
-                  });
-          }
-        
+                if(!cartAdder.includes(item)){
+                    cartAdder.push(item)
+                    console.log('after updated',cartAdder)
+                    dispatch(addToCart(cartAdder))
+                    toast.success("Item added to cart", {
+                        position: toast.POSITION.TOP_RIGHT  ,  
+                      });
+                }
+                else{
+                    toast.info("Item already in cart", {
+                        position: toast.POSITION.TOP_RIGHT  ,  
+                      });
+              }
     }
     
     const handleCheckOut = (check) =>{
-        console.log(checkOutData)
+        //console.log(checkOutData)
         dispatch(productCheckout(check))
         dispatch(checkoutItemUpdater(1))
         navigate('/checkout')    
@@ -86,15 +87,27 @@ const Home = () =>{
 
     const handleview = (view) =>{
         dispatch(viewAdder(view))
-        console.log(v)
+        //console.log(v)
         navigate('/productview')
     }
+
+    const applyFilter = () =>{
+        
+    }
+
+    useEffect(()=>{
+        // console.log(apiResp.dropDownFilter)
+        // console.log(apiResp.tobeFiltered)
+        let val =[]
+        currentPosts = products.filter((item)=>item.category == apiResp.tobeFiltered)
+        //console.log(currentPosts)
+    },[apiResp.dropDownFilter,apiResp.tobeFiltered])
 
     const getData = async() =>{
         const url = await fetch(`https://fakestoreapi.com/products/`)
         const json = await url.json()
         dispatch(addApiData(json))
-        //console.log(json)
+        //console.log(url)
     }
 
     useEffect(()=>{
@@ -108,24 +121,30 @@ const Home = () =>{
        
     },[term])
 
-    // console.log(location)
+     //console.log(filterData.filter)
     // console.log(products)
 
     return(
         <>
-            <ToastContainer autoClose={4000}/>
+            <ToastContainer autoClose={2500}/>
 
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen ">
                 <Navbar side={side} setSide={setSide}></Navbar>
             
                 <div className=" flex flex-1 ">
-                {side && <SideBar side={side} setSide={setSide} currentPage={currentPage} setCurrentPage={setCurrentPage}/>}
+                {side && <SideBar side={side} setSide={setSide} currentPage={currentPage} setCurrentPage={setCurrentPage} totalPosts={products.length} totalFilteredPosts={filteredProducts.length} postsPerPage={postsPerPage} clicked={clicked} setPostsPerPage={setPostsPerPage} applyFilter={applyFilter}/>}
 
-                    <ProductRenderer currentPosts={currentPosts} filteredPosts={filteredPosts} filteredProducts={filteredProducts} handleCheckOut={handleCheckOut} hanldeAddToCart={hanldeAddToCart} handleview={handleview} clicked={clicked}/>
+                    {/* {filterData.filter ?
+                    <Filtered handleCheckOut={handleCheckOut} handleAddToCart={handleAddToCart} handleview={handleview} />
+                    :
                     
+                    } */}
+                    
+                    <ProductRenderer currentPosts={currentPosts} filteredPosts={filteredPosts} filteredProducts={filteredProducts} handleCheckOut={handleCheckOut} handleAddToCart={handleAddToCart} handleview={handleview} clicked={clicked} term={term}/>
+
                 </div>
                 
-                <div className="bg-gray-200 p-4">
+                <div className="bg-slate-500 p-4">
                 <Pagination totalPosts={products.length} totalFilteredPosts={filteredProducts.length} postsPerPage={postsPerPage} currentPage={currentPage} setCurrentPage={setCurrentPage} clicked={clicked}/>
                 </div>
             </div>

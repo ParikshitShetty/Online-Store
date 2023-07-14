@@ -1,10 +1,11 @@
-import { ADD_DATA,FILTER_DATA,SET_SEARCHTERM,SET_DROPDOWNFILTER,SET_CLICKED } from "../actionTypes/ActionTypes";
+import { ADD_DATA,FILTER_DATA,SET_SEARCHTERM,SET_DROPDOWNFILTER,SET_CLICKED,SEC_FILTER } from "../actionTypes/ActionTypes";
 
 const initialState = {
     searchTerm : '',
     data : [],
     filtered : [],
     dropDownFilter : '',
+    tobeFiltered : '',
     clicked : false,
 }
 
@@ -43,7 +44,12 @@ const homeReducer = (state = initialState, action) =>{
                 clicked : action.payload,
             
             }
-            
+        case SEC_FILTER:
+            return{
+                ...state,
+                tobeFiltered : action.payload,
+                
+            }            
         
         default:
             return state;
